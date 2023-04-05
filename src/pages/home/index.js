@@ -23,7 +23,7 @@ export function Home() {
   }, [])
 
   function handleSearch(){
-
+    
   }
 
  return (
