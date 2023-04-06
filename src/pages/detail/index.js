@@ -1,6 +1,6 @@
 
 import { useLayoutEffect, useState } from 'react'
-import { View, Text, StyleSheet, Pressable, ScrollView, Image, Modal } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Image, Modal, Share } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native'
 
 import { Entypo, AntDesign, Feather } from '@expo/vector-icons'
@@ -29,6 +29,16 @@ export function Detail() {
     setShowVideo(true)
   }
 
+  async function shareReceipe(){
+    try {
+      await Share.share({
+        message: `Receita: ${route.params?.data.name}\nIngredientes:  ${route.params?.data.total_ingredients}`
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
  return (
    <ScrollView contentContainerStyle={{ paddingBottom: 14 }} style={styles.container} showsVerticalScrollIndicator={false}>
  
@@ -46,7 +56,7 @@ export function Detail() {
         <Text style={styles.title}>{route.params?.data.name}</Text>
         <Text style={styles.ingredientsText}>ingredientes ({route.params?.data.total_ingredients})</Text>
       </View>
-      <Pressable>
+      <Pressable onPress={shareReceipe}>
         <Feather name='share-2' size={24} color='#121212' />
       </Pressable>
     </View>
