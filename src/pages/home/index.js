@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 
 import { Ionicons } from '@expo/vector-icons'
 import { Logo } from '../../components/logo'
@@ -11,6 +12,7 @@ import api from '../../services/api'
 export function Home() {
   const [inputValue, setinputValue] = useState("")
   const [foods, setFoods] = useState([])
+  const navigation = useNavigation()
 
   useEffect(() => {
     async function fetchApi(){
@@ -23,7 +25,11 @@ export function Home() {
   }, [])
 
   function handleSearch(){
-    
+    if(!inputValue) return
+
+    let input = inputValue
+    setinputValue('')
+    navigation.navigate('Search', { name: input })
   }
 
  return (

@@ -27,7 +27,7 @@ export function StackRoutes(){
                 name="Search" 
                 component={Search} 
                 options={{
-                    title: 'veja o que encontramos'
+                    title: 'Veja o que encontramos'
                 }}
                 />
         </Stack.Navigator>
